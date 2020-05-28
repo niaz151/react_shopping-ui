@@ -1,0 +1,12 @@
+.product-list-container{
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-column-gap: 1%;
+  grid-row-gap: 3%;
+  background-color:	#F9F7F3;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
