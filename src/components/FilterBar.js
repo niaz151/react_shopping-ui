@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
+import Button from '@material-ui/core/Button';
 import '../styles/FilterBar.css';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -45,10 +46,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FilterBar() {
+
+  // === STATE HOOKS ===
   const classes = useStyles();
   const [category, setCategory] = React.useState('');
   const [sorting_method, setSortingMethod] = React.useState('');
+  const [size, setSize] = React.useState('');
 
+  // === EVENT HANDLERS ===
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
@@ -57,9 +62,20 @@ export default function FilterBar() {
     setSortingMethod(event.target.value);
   };
 
+  const handleSizeChange = (event) => {
+    setSize(event.target.value);
+  };
+
+  const handleFilterRequest = () => {
+    console.log(category);
+    console.log(sorting_method);
+    console.log(size);
+  }
+
   return (
     <div className='filterbar-container'>
 
+      {/* CATEGORY FILTER */}
       <FormControl className={classes.margin}>
         <InputLabel id="demo-customized-select-label">Category</InputLabel>
         <Select
@@ -69,12 +85,30 @@ export default function FilterBar() {
           input={<BootstrapInput />}
         >
           <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={10}>Shirts</MenuItem>
-          <MenuItem value={20}>Pants</MenuItem>
-          <MenuItem value={30}>Coats</MenuItem>
+          <MenuItem value={"Shirts"}>Shirts</MenuItem>
+          <MenuItem value={"Pants"}>Pants</MenuItem>
+          <MenuItem value={"Coats"}>Coats</MenuItem>
         </Select>
       </FormControl>
 
+    {/* SIZE FILTER */}
+      <FormControl className={classes.margin}>
+        <InputLabel id="demo-customized-select-label">Size</InputLabel>
+        <Select
+          id="demo-customized-select"
+          value={size}
+          onChange={handleSizeChange}
+          input={<BootstrapInput />}
+        >
+          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value={"Small"}>Small</MenuItem>
+          <MenuItem value={"Medium"}>Medium</MenuItem>
+          <MenuItem value={"Large"}>Large</MenuItem>
+        </Select>
+      </FormControl>
+
+
+      {/* PRICE FILTER */}
       <FormControl className={classes.margin}>
         <InputLabel id="demo-customized-select-label">Sort By</InputLabel>
         <Select
@@ -84,11 +118,15 @@ export default function FilterBar() {
           input={<BootstrapInput />}
         >
           <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={10}>Price: Ascending</MenuItem>
-          <MenuItem value={20}>Price: Descending</MenuItem>
+          <MenuItem value={"Ascending"}>Price: Ascending</MenuItem>
+          <MenuItem value={"Descending"}>Price: Descending</MenuItem>
         </Select>
       </FormControl>
       
+      <Button variant="contained" color="primary" onClick={handleFilterRequest}>
+        Filter
+      </Button>
+
     </div>
   );
 }

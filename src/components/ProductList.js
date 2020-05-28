@@ -13,6 +13,7 @@ class ProductList extends React.Component{
 
   // GET ALL PRODUCTS
   componentDidMount(){
+    console.log('hi')
     var endpoint = 'http://localhost:8080/api/v1/products/getAllProducts';
     fetch(endpoint)
       .then(res => {
@@ -32,7 +33,6 @@ class ProductList extends React.Component{
     if(state_copy.length !== undefined){
       for(var i = 0; i < state_copy.length; i ++){
         var img_src = state_copy[i].img_src;
-        console.log(img_src)
         var name = state_copy[i].name;
         var price = state_copy[i].price.toFixed(2) ;
         output.push(
@@ -40,6 +40,7 @@ class ProductList extends React.Component{
             img_src={img_src} 
             name={name}
             price={price}
+            key={i}
           />
         )
       }

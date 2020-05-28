@@ -6,3 +6,7 @@
   justify-content: center;
   margin-top:20px;
 }
+
+.filterbar-form{
+  display:none;
+}

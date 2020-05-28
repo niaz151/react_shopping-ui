@@ -14,7 +14,7 @@ const Product = (props) => {
             ${props.price}
           </div>
           <div>
-            <AddCircleOutlineIcon fontSize={"medium"} onClick={()=>alert('Added To Cart')} />
+            <AddCircleOutlineIcon fontSize={"default"} onClick={()=>alert('Added To Cart')} />
           </div>
         </div>
         <div className="product-title">

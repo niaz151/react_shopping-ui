@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const Header = () => {
   return (
     <div>
-      <AppBar position="static" color={"red"} style={{margin:0, padding:0}}>
+      <AppBar position="static" style={{margin:0, padding:0}}>
         <Toolbar>
 
           <Typography variant="h6" noWrap>
