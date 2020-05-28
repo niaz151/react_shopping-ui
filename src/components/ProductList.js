@@ -13,7 +13,6 @@ class ProductList extends React.Component{
 
   // GET ALL PRODUCTS
   componentDidMount(){
-    console.log('hi')
     var endpoint = 'http://localhost:8080/api/v1/products/getAllProducts';
     fetch(endpoint)
       .then(res => {

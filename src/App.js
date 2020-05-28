@@ -5,7 +5,7 @@ import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import { createStore } from 'redux';
 import reducers from './redux/reducers';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 
 const store = createStore(reducers);
 

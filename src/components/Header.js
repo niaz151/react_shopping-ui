@@ -5,8 +5,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {useSelector} from 'react-redux';
 
 const Header = () => {
+
+  const num_cart_items = useSelector( state => state['shopping_cart'].num_items);
+
   return (
     <div>
       <AppBar position="static" style={{margin:0, padding:0}}>
@@ -20,7 +24,7 @@ const Header = () => {
 
           <div>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={num_cart_items} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
