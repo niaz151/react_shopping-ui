@@ -1,8 +1,21 @@
 import React from 'react';
 import '../styles/Product.css';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {useDispatch} from 'react-redux';
 
 const Product = (props) => {
+
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    var item = {
+      "price": props.price,
+      "img": props.img,
+      "title":props.name
+    }
+    dispatch({type:'ADD_TO_CART', payload: item})
+  }
+
   return(
     <div className='product-container'>
       <div className='product-image-container'>
@@ -14,7 +27,7 @@ const Product = (props) => {
             ${props.price}
           </div>
           <div>
-            <AddCircleOutlineIcon fontSize={"default"} onClick={()=>alert('Added To Cart')} />
+            <AddCircleOutlineIcon fontSize={"default"} onClick={addToCart} />
           </div>
         </div>
         <div className="product-title">
