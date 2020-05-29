@@ -4,7 +4,7 @@ import ProductList from './components/ProductList';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import { createStore } from 'redux';
-import reducers from './redux/reducers';
+import reducers from './reducers';
 import { Provider } from 'react-redux';
 
 const store = createStore(reducers);

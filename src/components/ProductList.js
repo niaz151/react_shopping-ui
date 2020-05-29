@@ -1,56 +1,51 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../styles/ProductList.css';
 import Product from './Product';
+import { useDispatch, useSelector } from 'react-redux';
 
-class ProductList extends React.Component{
 
-  constructor(){
-    super();
-    this.state = {
-      products:{}
-    }
-  }
+const ProductList = () => {
 
-  // GET ALL PRODUCTS
-  componentDidMount(){
+  const dispatch = useDispatch();
+  const products = useSelector(state => state['products']);
+
+  // PUT ALL PRODUCTS IN REDUX STORE
+  useEffect( () => {
     var endpoint = 'http://localhost:8080/api/v1/products/getAllProducts';
     fetch(endpoint)
       .then(res => {
         return res.json();
       })
       .then(data => {
-        this.setState({
-          products:data
-        })
+        dispatch({type:'INITIALIZE_DATA', payload: data})
       }) 
-  }
+  }, [dispatch]);
 
-  render(){
-
-    var output = [];
-    var state_copy = this.state.products
-    if(state_copy.length !== undefined){
-      for(var i = 0; i < state_copy.length; i ++){
-        var img_src = state_copy[i].img_src;
-        var name = state_copy[i].name;
-        var price = state_copy[i].price.toFixed(2) ;
-        output.push(
-          <Product 
-            img_src={img_src} 
-            name={name}
-            price={price}
-            key={i}
-          />
-        )
-      }
+  // MAP STORE PRODUCTS TO PRODUCT OBJECTS
+  var output = [];
+  if(products.length !== undefined){
+    for(var i = 0; i < products.length; i ++){
+      var img_src = products[i].img_src;
+      var name = products[i].name;
+      var price = products[i].price.toFixed(2) ;
+      output.push(
+        <Product 
+          img_src={img_src} 
+          name={name}
+          price={price}
+          key={i}
+        />
+      )
     }
-
-    return(
-      <div className="product-list-container">
-        {output}
-      </div>
-    )
   }
+
+  return(
+    <div className="product-list-container">
+      {output}
+    </div>
+  )
 }
+
+
 
 export default ProductList;
