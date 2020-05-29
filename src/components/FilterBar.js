@@ -7,6 +7,7 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import '../styles/FilterBar.css';
+import { useDispatch } from 'react-redux';
 
 const BootstrapInput = withStyles((theme) => ({
   input: {
@@ -39,93 +40,124 @@ const BootstrapInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
 
 export default function FilterBar() {
 
-  // === STATE HOOKS ===
-  const classes = useStyles();
+  // === HOOKS ===
   const [category, setCategory] = React.useState('');
   const [sorting_method, setSortingMethod] = React.useState('');
   const [size, setSize] = React.useState('');
+  const dispatch = useDispatch();
 
-  // === EVENT HANDLERS ===
+
+  // === CATEGORY HANDLER ===
   const handleCategoryChange = (event) => {
+
     setCategory(event.target.value);
+    var endpoint;
+   
+    // IF NO FILTER , SHOW ALL PRODUCTS 
+    (event.target.value === '')?
+      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
+      endpoint = `http://localhost:8080/api/v1/products/getProductsByCategoryId/${event.target.value}`;
+    
+    // FETCH REQUEST TO API
+    fetch(endpoint)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch({type:'UPDATE_DATA', payload: data})
+    }) 
   };
   
+  // === SORTING HANDLER ===
   const handleSortingMethodChange = (event) => {
     setSortingMethod(event.target.value);
+    var endpoint;
+   
+    // IF NO FILTER , SHOW ALL PRODUCTS 
+    (event.target.value === '')?
+      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
+      endpoint = `http://localhost:8080/api/v1/products/getProductsByPrice/${event.target.value}`;
+  
+    // FETCH REQUEST TO API
+    fetch(endpoint)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch({type:'UPDATE_DATA', payload: data})
+    }) 
   };
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
+    var endpoint;
+   
+    // IF NO FILTER , SHOW ALL PRODUCTS 
+    (event.target.value === '')?
+      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
+      endpoint = `http://localhost:8080/api/v1/products/getProductsBySize/${event.target.value}`;
+  
+    // FETCH REQUEST TO API
+    fetch(endpoint)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch({type:'UPDATE_DATA', payload: data})
+    }) 
   };
-
-  const handleFilterRequest = () => {
-    console.log(category);
-    console.log(sorting_method);
-    console.log(size);
-  }
 
   return (
     <div className='filterbar-container'>
 
       {/* CATEGORY FILTER */}
-      <FormControl className={classes.margin}>
+      <FormControl className='filterbar-form'>
         <InputLabel id="demo-customized-select-label">Category</InputLabel>
         <Select
-          id="demo-customized-select"
           value={category}
           onChange={handleCategoryChange}
           input={<BootstrapInput />}
         >
           <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={"Shirts"}>Shirts</MenuItem>
-          <MenuItem value={"Pants"}>Pants</MenuItem>
-          <MenuItem value={"Coats"}>Coats</MenuItem>
+          <MenuItem value={1}>Shorts</MenuItem>
+          <MenuItem value={2}>Shirts</MenuItem>
+          <MenuItem value={3}>Sweater</MenuItem>
+          <MenuItem value={4}>Coats</MenuItem>
         </Select>
       </FormControl>
 
     {/* SIZE FILTER */}
-      <FormControl className={classes.margin}>
+      <FormControl className='filterbar-form'>
         <InputLabel id="demo-customized-select-label">Size</InputLabel>
         <Select
-          id="demo-customized-select"
           value={size}
           onChange={handleSizeChange}
           input={<BootstrapInput />}
         >
           <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={"Small"}>Small</MenuItem>
-          <MenuItem value={"Medium"}>Medium</MenuItem>
-          <MenuItem value={"Large"}>Large</MenuItem>
+          <MenuItem value={1}>Small</MenuItem>
+          <MenuItem value={2}>Medium</MenuItem>
+          <MenuItem value={3}>Large</MenuItem>
         </Select>
       </FormControl>
 
 
       {/* PRICE FILTER */}
-      <FormControl className={classes.margin}>
+      <FormControl className='filterbar-form'>
         <InputLabel id="demo-customized-select-label">Sort By</InputLabel>
         <Select
-          id="demo-customized-select"
           value={sorting_method}
           onChange={handleSortingMethodChange}
           input={<BootstrapInput />}
         >
           <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={"Ascending"}>Price: Ascending</MenuItem>
-          <MenuItem value={"Descending"}>Price: Descending</MenuItem>
+          <MenuItem value={"ascending"}>Price: Ascending</MenuItem>
+          <MenuItem value={"descending"}>Price: Descending</MenuItem>
         </Select>
       </FormControl>
-      
-      <Button variant="contained" color="primary" onClick={handleFilterRequest}>
-        Filter
-      </Button>
 
     </div>
   );

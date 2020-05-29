@@ -17,7 +17,8 @@ const ProductList = () => {
         return res.json();
       })
       .then(data => {
-        dispatch({type:'INITIALIZE_DATA', payload: data})
+        console.log(data)
+        dispatch({type:'UPDATE_DATA', payload: data})
       }) 
   }, [dispatch]);
 
