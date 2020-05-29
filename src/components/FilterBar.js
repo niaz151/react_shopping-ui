@@ -48,6 +48,7 @@ export default function FilterBar() {
   const [size, setSize] = React.useState('');
   const dispatch = useDispatch();
 
+
 // === INITIALIZE OPTIONS ===
   useEffect( () => {
     setCategory(0);
@@ -55,7 +56,8 @@ export default function FilterBar() {
     setSortingMethod('None');
   },[]);
 
-  // === CATEGORY HANDLER ===
+
+  // = = = = = = = = = = = = CATEGORY HANDLER  = = = = = = = = = = = =
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
     setSize(0);
@@ -76,7 +78,9 @@ export default function FilterBar() {
     }) 
   };
 
-  // === SIZE HANDLER ===
+
+
+  // = = = = = = = = = = = = SIZE HANDLER  = = = = = = = = = = = =
   const handleSizeChange = (event) => {
     
     setSize(event.target.value);
@@ -95,7 +99,7 @@ export default function FilterBar() {
   };
 
 
-  // === SORTING HANDLER ===
+   // = = = = = = = = = = = = SORTING HANDLER  = = = = = = = = = = = =
   const handleSortingMethodChange = (event) => {
     
     setSortingMethod(event.target.value);
