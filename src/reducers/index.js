@@ -4,5 +4,5 @@ import filterReducer from './filterReducer';
 
 export default combineReducers({
   products: filterReducer,
-  shopping_cart: updateCartReducer
+  shopping_cart: updateCartReducer,
 })

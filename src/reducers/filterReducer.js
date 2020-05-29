@@ -7,7 +7,6 @@ export default (state = intial_state, action) => {
   switch(action.type){
     case 'UPDATE_DATA':
       new_state = action.payload;
-      console.log(action.payload);
       return new_state;
 
     default:

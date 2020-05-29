@@ -1,11 +1,10 @@
-import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
-import Button from '@material-ui/core/Button';
 import '../styles/FilterBar.css';
 import { useDispatch } from 'react-redux';
 
@@ -49,17 +48,59 @@ export default function FilterBar() {
   const [size, setSize] = React.useState('');
   const dispatch = useDispatch();
 
+// === INITIALIZE OPTIONS ===
+  useEffect( () => {
+    setCategory(0);
+    setSize(0);
+    setSortingMethod('None');
+  },[]);
 
   // === CATEGORY HANDLER ===
   const handleCategoryChange = (event) => {
-
     setCategory(event.target.value);
-    var endpoint;
+    setSize(0);
+    setSortingMethod('');
    
     // IF NO FILTER , SHOW ALL PRODUCTS 
-    (event.target.value === '')?
-      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
-      endpoint = `http://localhost:8080/api/v1/products/getProductsByCategoryId/${event.target.value}`;
+    var endpoint = (event.target.value === 0)?
+      `http://localhost:8080/api/v1/products/getAllProducts`:
+      `http://localhost:8080/api/v1/products/getProducts/category=${event.target.value}`;
+    
+    // FETCH REQUEST TO API AND STORE QUERY
+    fetch(endpoint)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch({type:'UPDATE_DATA', payload: data})
+    }) 
+  };
+
+  // === SIZE HANDLER ===
+  const handleSizeChange = (event) => {
+    
+    setSize(event.target.value);
+    setSortingMethod('');
+    
+    var endpoint =  `http://localhost:8080/api/v1/products/getProducts/category=${category}/size=${event.target.value}`;
+
+    // FETCH REQUEST TO API
+    fetch(endpoint)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      dispatch({type:'UPDATE_DATA', payload: data})
+    }) 
+  };
+
+
+  // === SORTING HANDLER ===
+  const handleSortingMethodChange = (event) => {
+    
+    setSortingMethod(event.target.value);
+    
+    var endpoint =`http://localhost:8080/api/v1/products/getProducts/category=${category}/size=${size}/sort=${event.target.value}`;
     
     // FETCH REQUEST TO API
     fetch(endpoint)
@@ -70,45 +111,8 @@ export default function FilterBar() {
       dispatch({type:'UPDATE_DATA', payload: data})
     }) 
   };
-  
-  // === SORTING HANDLER ===
-  const handleSortingMethodChange = (event) => {
-    setSortingMethod(event.target.value);
-    var endpoint;
-   
-    // IF NO FILTER , SHOW ALL PRODUCTS 
-    (event.target.value === '')?
-      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
-      endpoint = `http://localhost:8080/api/v1/products/getProductsByPrice/${event.target.value}`;
-  
-    // FETCH REQUEST TO API
-    fetch(endpoint)
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      dispatch({type:'UPDATE_DATA', payload: data})
-    }) 
-  };
 
-  const handleSizeChange = (event) => {
-    setSize(event.target.value);
-    var endpoint;
-   
-    // IF NO FILTER , SHOW ALL PRODUCTS 
-    (event.target.value === '')?
-      endpoint = `http://localhost:8080/api/v1/products/getAllProducts`:
-      endpoint = `http://localhost:8080/api/v1/products/getProductsBySize/${event.target.value}`;
-  
-    // FETCH REQUEST TO API
-    fetch(endpoint)
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      dispatch({type:'UPDATE_DATA', payload: data})
-    }) 
-  };
+
 
   return (
     <div className='filterbar-container'>
@@ -121,7 +125,7 @@ export default function FilterBar() {
           onChange={handleCategoryChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value={0}><em>All Products</em></MenuItem>
           <MenuItem value={1}>Shorts</MenuItem>
           <MenuItem value={2}>Shirts</MenuItem>
           <MenuItem value={3}>Sweater</MenuItem>
@@ -137,7 +141,7 @@ export default function FilterBar() {
           onChange={handleSizeChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value={0}><em>All Sizes</em></MenuItem>
           <MenuItem value={1}>Small</MenuItem>
           <MenuItem value={2}>Medium</MenuItem>
           <MenuItem value={3}>Large</MenuItem>
@@ -153,9 +157,9 @@ export default function FilterBar() {
           onChange={handleSortingMethodChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={"ascending"}>Price: Ascending</MenuItem>
-          <MenuItem value={"descending"}>Price: Descending</MenuItem>
+          <MenuItem value="None"><em>None</em></MenuItem>
+          <MenuItem value={"ASC"}>Price: Ascending</MenuItem>
+          <MenuItem value={"DESC"}>Price: Descending</MenuItem>
         </Select>
       </FormControl>
 
