@@ -1,6 +1,27 @@
 var initial_state = {
   'num_items':0,
-  'items':[]
+  'items':[
+    {
+      "price": 20.00,
+      "title": "Shirt",
+      "img": "img"
+    },
+    {
+      "price": 10.00,
+      "title": "Dress",
+      "img": "img"
+    },
+    {
+      "price": 10.00,
+      "title": "Dress",
+      "img": "img"
+    },
+    {
+      "price": 10.00,
+      "title": "Dress",
+      "img": "img"
+    }
+  ]
 };
 
 export default (state = initial_state, action) => {

@@ -6,6 +6,7 @@ import FilterBar from './components/FilterBar';
 import { createStore } from 'redux';
 import reducers from './reducers';
 import { Provider } from 'react-redux';
+import ShoppingCartLanding from './components/ShoppingCartLanding';
 
 const store = createStore(reducers);
 
@@ -14,9 +15,8 @@ function App() {
     <Provider store={store}>
     <div className="App">
       <Header/>
-      <FilterBar/>
       <div className='container'>
-        <ProductList/>
+        <ShoppingCartLanding/>
       </div>
     </div>
     </Provider>
