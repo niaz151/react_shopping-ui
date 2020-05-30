@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import '../styles/ProductList.css';
 import Product from './Product';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Header from './Header';
+import FilterBar from './FilterBar';
 
 const ProductList = () => {
 
@@ -42,9 +43,13 @@ const ProductList = () => {
   }
 
   return(
-    <div className="product-list-container">
-      {output}
-    </div>
+    <>
+      <Header/>
+      <FilterBar/>
+      <div className="product-list-container">
+        {output}
+      </div>
+    </>
   )
 }
 

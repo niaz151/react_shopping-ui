@@ -61,7 +61,7 @@ export default function FilterBar() {
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
     setSize(0);
-    setSortingMethod('');
+    setSortingMethod('None');
    
     // IF NO FILTER , SHOW ALL PRODUCTS 
     var endpoint = (event.target.value === 0)?
@@ -84,7 +84,7 @@ export default function FilterBar() {
   const handleSizeChange = (event) => {
     
     setSize(event.target.value);
-    setSortingMethod('');
+    setSortingMethod('None');
     
     var endpoint =  `http://localhost:8080/api/v1/products/getProducts/category=${category}/size=${event.target.value}`;
 

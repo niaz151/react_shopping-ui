@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {ProductList} from './ProductList';
 
 const Header = () => {
 
@@ -17,7 +19,7 @@ const Header = () => {
         <Toolbar>
 
           <Typography variant="h6" noWrap>
-            Shopping Site
+            <Link to='/' style={{textDecoration:"none", color:"white"}}> Shopping Site </Link>
           </Typography>
           
           <div style={{flexGrow:1}} />
@@ -25,7 +27,7 @@ const Header = () => {
           <div>
             <IconButton color="inherit">
               <Badge badgeContent={num_cart_items} color="secondary">
-                <ShoppingCartIcon />
+                <Link to='/cart' style={{textDecoration:"none", color:"white"}}> <ShoppingCartIcon /> </Link>
               </Badge>
             </IconButton>
           </div>
