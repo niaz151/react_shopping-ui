@@ -37,8 +37,6 @@
 .shoppingcart-menu-items{
   flex:6;
   width: 100%;
-  border-top:2px solid #e0deda;
-  border-bottom:2px solid #e0deda;
   display:flex;
   flex-direction: column;
   align-items: center;

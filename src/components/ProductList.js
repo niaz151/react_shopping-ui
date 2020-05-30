@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import '../styles/ProductList.css';
-import Product from './Product';
+import ProductTile from './ProductTile';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './Header';
 import FilterBar from './FilterBar';
@@ -31,7 +31,7 @@ const ProductList = () => {
       var description = products[i].description;
       var price = products[i].price.toFixed(2) ;
       output.push(
-        <Product 
+        <ProductTile 
           img_src={img_src} 
           name={name}
           price={price}
