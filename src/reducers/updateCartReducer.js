@@ -1,38 +1,39 @@
+import { CardActionArea } from "@material-ui/core";
+
 var initial_state = {
-  'num_items':0,
-  'items':[]
+  num_items:0,
+  items:[]
 };
 
 export default (state = initial_state, action) => {
-  
-  var new_state
- 
-  switch(action.type){
 
+  switch(action.type){
+ 
     case 'ADD_TO_CART':
-      new_state = state;
-      new_state.num_items = new_state.num_items += 1;
-      new_state.items.push(action.payload);
-      return new_state;
+      return {
+        ...state,
+        num_items: state.num_items += 1,
+        items:[...state.items,action.payload]
+      }
 
     case 'REMOVE_FROM_CART':
-      
-      new_state = state;
-      new_state.num_items = new_state.num_items -= 1;
-      for(var i = 0; i < new_state.items.length; i++){
-        if(new_state.items[i].title === action.payload){
-          new_state.items.splice(i,1);
+      console.log(action.payload)
+      var index;
+      for(var i = 0; i < state.length; i ++){
+        if(state.items[i].title === action.payload){
+          index = i;
         }
       }
-      console.log(new_state)
-      return new_state
+      return {
+        ...state,
+        num_items: state.num_items -= 1,
+        items:state.items.splice(index,1)
+      }
 
-    case 'UPDATE_QUANTITY':
-      return new_state;
 
     default:
       return initial_state;
 
   }
 
-}
+} 

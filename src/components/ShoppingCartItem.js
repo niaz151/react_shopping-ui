@@ -9,7 +9,7 @@ const ShoppingCartItem = (props) => {
     const dispatch = useDispatch();
 
     function handleClick(){
-        dispatch({type:'REMOVE_FROM_CART', payload: props.title})
+        dispatch({type:'REMOVE_FROM_CART', payload: props.title});
     }
 
     return(

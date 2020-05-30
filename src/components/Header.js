@@ -7,7 +7,6 @@ import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {ProductList} from './ProductList';
 
 const Header = () => {
 

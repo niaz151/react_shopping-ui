@@ -18,6 +18,7 @@ const ShoppingCartLanding = () => {
           title={shopping_cart[i].title}
           price={shopping_cart[i].price}
           description={shopping_cart[i].description}
+          key={i}
         />
       )
     }
@@ -44,7 +45,7 @@ const ShoppingCartLanding = () => {
   }
 
   return(
-    <>
+    <React.Fragment>
       <Header/>
       <div className='shoppingcart-landing'>
         <div className='shoppingcart-menu'>
@@ -60,7 +61,7 @@ const ShoppingCartLanding = () => {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   )
 }
 
