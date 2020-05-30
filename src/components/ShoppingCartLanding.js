@@ -10,6 +10,7 @@ const ShoppingCartLanding = () => {
   // === HOOKS ===
   const shopping_cart = useSelector(state => state['shopping_cart'].items);
 
+  // = = = = = = RENDER CART ITEMS = = = = = =
   function renderCartItems(){
     var output = [];
     for(var i = 0 ; i < shopping_cart.length; i++){
@@ -21,27 +22,47 @@ const ShoppingCartLanding = () => {
           key={i}
         />
       )
-    }
+    } 
     return output;
   }
 
+  // = = = = = = RENDER CART TOTAL = = = = = =
   function renderOrderTotal(){
+
     var price = 0;
     for(var i = 0; i < shopping_cart.length; i ++){
       price += parseInt(shopping_cart[i].price);
     }
-    return(
-      <div className='shoppingcart-menu-total'>
+
+    return (shopping_cart.length === 0)?
+      (
+        <div className='shoppingcart-noitem-banner'>
+          No Items In Cart
+        </div>
+      ):
+      (
+        <div className='shoppingcart-menu-total'>
           <div className='shoppingcart-menu-item-quantitiy'>
           </div>
           <div className='shoppingcart-menu-item-name'>
-         
+        
           </div>
           <div className='shoppingcart-menu-item-total-price'>
             {`$ ${price}`}
           </div>
-      </div>
-    )
+        </div>
+      )
+  }
+
+  // = = = = = = RENDER ORDER BUTTON = = = = = =
+  function renderOrderButton(){
+    return (shopping_cart.length === 0)? 
+      null: 
+      (
+        <div className='shoppingcart-submit-order-wrap'>
+          <Button variant="contained" color="primary"> Place Order </Button>
+        </div>
+      )
   }
 
   return(
@@ -56,9 +77,7 @@ const ShoppingCartLanding = () => {
             {renderCartItems()}
             {renderOrderTotal()}
           </div>
-          <div className='shoppingcart-submit-order-wrap'>
-            <Button variant="contained" color="primary"> Place Order </Button>
-          </div>
+          {renderOrderButton()}
         </div>
       </div>
     </React.Fragment>

@@ -17,7 +17,6 @@ export default (state = initial_state, action) => {
       }
 
     case 'REMOVE_FROM_CART':
-      console.log(action.payload)
       var index;
       for(var i = 0; i < state.length; i ++){
         if(state.items[i].title === action.payload){
