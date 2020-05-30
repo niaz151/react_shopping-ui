@@ -16,24 +16,22 @@ const ShoppingCartLanding = () => {
       price += shopping_cart[i].price;
     }
     price = price.toFixed(2);
-    console.log(price);
-    return price;
+    return `$ ${price}`;
   }
 
-  function renderCartRow(props){
-    return(
-      <div className='shoppingcart-menu-item'>
-          <div className='shoppingcart-menu-item-quantitiy'>
-            <DeleteForeverIcon/>
-          </div>
-          <div className='shoppingcart-menu-item-name'>
-            Shirt: Casual Shirt for Everyday Wear
-          </div>
-          <div className='shoppingcart-menu-item-price'>
-            $12.50
-          </div>
-      </div>
-    )
+  function renderAllCartRows(){
+    var output = [];
+    for (var i = 0; i < shopping_cart.length; i ++){
+      console.log(shopping_cart[i])
+      output.push(
+        <RenderCartRow 
+          title={shopping_cart[i].title} 
+          price={shopping_cart[i].price}
+          description={shopping_cart[i].description}
+        />
+      )
+    }
+    return output;
   }
 
   function renderOrderTotalRow(){
@@ -46,12 +44,11 @@ const ShoppingCartLanding = () => {
          
           </div>
           <div className='shoppingcart-menu-item-total-price'>
-            $12.50
+            {getCartPrice()}
           </div>
       </div>
     )
   }
-
 
   return(
     <div className='shoppingcart-landing'>
@@ -60,15 +57,29 @@ const ShoppingCartLanding = () => {
           Your Personalized Cart
         </div>
         <div className='shoppingcart-menu-items'>
-          {renderCartRow()}
-          {renderCartRow()}
-          {renderCartRow()}
+          {renderAllCartRows()}
           {renderOrderTotalRow()}
         </div>
         <div className='shoppingcart-submit-order-wrap'>
           <Button variant="contained" color="primary"> Place Order </Button>
         </div>
       </div>
+    </div>
+  )
+}
+
+function RenderCartRow(props){
+  return(
+    <div className='shoppingcart-menu-item'>
+        <div className='shoppingcart-menu-item-quantitiy'>
+          <DeleteForeverIcon/>
+        </div>
+        <div className='shoppingcart-menu-item-name'>
+          {`${props.title} :  ${props.description}`}
+        </div>
+        <div className='shoppingcart-menu-item-price'>
+          {`$ ${props.price.toFixed(2)}`}
+        </div>
     </div>
   )
 }

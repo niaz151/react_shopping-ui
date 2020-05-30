@@ -4,22 +4,26 @@ var initial_state = {
     {
       "price": 20.00,
       "title": "Shirt",
-      "img": "img"
+      "img": "img",
+      "description": "Lorem Ipsum"
     },
     {
       "price": 10.00,
       "title": "Dress",
-      "img": "img"
+      "img": "img",
+      "description": "Lorem Ipsum"
     },
     {
       "price": 10.00,
       "title": "Dress",
-      "img": "img"
+      "img": "img",
+      "description": "Lorem Ipsum"
     },
     {
       "price": 10.00,
       "title": "Dress",
-      "img": "img"
+      "img": "img",
+      "description": "Lorem Ipsum"
     }
   ]
 };

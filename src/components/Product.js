@@ -11,7 +11,8 @@ const Product = (props) => {
     var item = {
       "price": props.price,
       "img": props.img,
-      "title":props.name
+      "title":props.name,
+      "description":props.description
     }
     dispatch({type:'ADD_TO_CART', payload: item})
   }

@@ -27,6 +27,7 @@ const ProductList = () => {
     for(var i = 0; i < products.length; i ++){
       var img_src = products[i].img_src;
       var name = products[i].name;
+      var description = products[i].description;
       var price = products[i].price.toFixed(2) ;
       output.push(
         <Product 
@@ -34,6 +35,7 @@ const ProductList = () => {
           name={name}
           price={price}
           key={i}
+          description={description}
         />
       )
     }
