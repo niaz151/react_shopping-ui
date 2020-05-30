@@ -1,31 +1,21 @@
 import React from 'react';
 import '../styles/ShoppingCartLanding.css';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import Button from '@material-ui/core/Button';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Header from './Header';
+import ShoppingCartItem from './ShoppingCartItem';
 
 const ShoppingCartLanding = () => {
   
   // === HOOKS ===
-  var shopping_cart = useSelector(state => state['shopping_cart'].items);
+  const shopping_cart = useSelector(state => state['shopping_cart'].items);
 
-  var test = shopping_cart[0].price;
-  function getCartPrice(){
-    var price = 0;
-    for(var i = 0; i < shopping_cart.length; i ++){
-      price += shopping_cart[i].price;
-    }
-    price = price.toFixed(2);
-    return `$ ${price}`;
-  }
-
-  function renderAllCartRows(){
+  function renderCartItems(){
     var output = [];
-    for (var i = 0; i < shopping_cart.length; i ++){
+    for(var i = 0 ; i < shopping_cart.length; i++){
       output.push(
-        <RenderCartRow 
-          title={shopping_cart[i].title} 
+        <ShoppingCartItem
+          title={shopping_cart[i].title}
           price={shopping_cart[i].price}
           description={shopping_cart[i].description}
         />
@@ -34,17 +24,20 @@ const ShoppingCartLanding = () => {
     return output;
   }
 
-  function renderOrderTotalRow(){
+  function renderOrderTotal(){
+    var price = 0;
+    for(var i = 0; i < shopping_cart.length; i ++){
+      price += parseInt(shopping_cart[i].price);
+    }
     return(
       <div className='shoppingcart-menu-total'>
           <div className='shoppingcart-menu-item-quantitiy'>
-            {test}
           </div>
           <div className='shoppingcart-menu-item-name'>
          
           </div>
           <div className='shoppingcart-menu-item-total-price'>
-            {getCartPrice()}
+            {`$ ${price}`}
           </div>
       </div>
     )
@@ -59,8 +52,8 @@ const ShoppingCartLanding = () => {
             Your Personalized Cart
           </div>
           <div className='shoppingcart-menu-items'>
-            {renderAllCartRows()}
-            {renderOrderTotalRow()}
+            {renderCartItems()}
+            {renderOrderTotal()}
           </div>
           <div className='shoppingcart-submit-order-wrap'>
             <Button variant="contained" color="primary"> Place Order </Button>
@@ -68,29 +61,6 @@ const ShoppingCartLanding = () => {
         </div>
       </div>
     </>
-  )
-}
-
-function RenderCartRow(props){
-
-  const dispatch = useDispatch();
-
-  function handleClick(){
-    dispatch({type:'REMOVE_FROM_CART', payload: props.title})
-  }
-
-  return(
-    <div className='shoppingcart-menu-item'>
-        <div className='shoppingcart-menu-item-quantitiy'>
-          <DeleteForeverIcon onClick={handleClick} />
-        </div>
-        <div className='shoppingcart-menu-item-name'>
-          {`${props.title} :  ${props.description}`}
-        </div>
-        <div className='shoppingcart-menu-item-price'>
-          {`$ ${props.price.toFixed(2)}`}
-        </div>
-    </div>
   )
 }
 

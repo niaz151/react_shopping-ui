@@ -1,0 +1,39 @@
+
+.shoppingcart-menu-item{
+    width: 80%;
+    height: 40px;
+    margin-top:30px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .shoppingcart-menu-item div{
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .shoppingcart-menu-item-quantitiy{
+    flex:1;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .shoppingcart-menu-item-name{
+    flex:5;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    border-left:2px solid #e0deda;
+  }
+  
+  .shoppingcart-menu-item-price{
+    flex:1;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
