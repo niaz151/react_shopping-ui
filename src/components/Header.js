@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 const Header = () => {
 
   const num_cart_items = useSelector( state => state['shopping_cart'].num_items);
-
+  
   return (
     <div>
       <AppBar position="static" style={{margin:0, padding:0}}>

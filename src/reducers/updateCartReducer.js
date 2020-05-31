@@ -7,6 +7,16 @@ var initial_state = {
 
 export default (state = initial_state, action) => {
 
+  /*
+
+  if you do not have any items in cart, no issues appear
+
+  if you add an item to the cart and then go back to the main page the cart is then emptied and cart value is 1
+
+  cart gets reset when navigating back to main page or to product detail page
+  */
+
+
   switch(action.type){
  
     case 'ADD_TO_CART':
@@ -36,7 +46,8 @@ export default (state = initial_state, action) => {
 
 
     default:
-      return initial_state;
+      console.log("default reducer option")
+      return state;
 
   }
 

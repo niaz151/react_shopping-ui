@@ -26,8 +26,7 @@ const ProductPage = (props) => {
     }
 
     return(
-        <>
-            <Header/>
+        <> 
             <div className='product-page-container'>
                 <div className='product-page-img-wrap'>
                     <img src={img_src} alt="" className="product-page-img" />

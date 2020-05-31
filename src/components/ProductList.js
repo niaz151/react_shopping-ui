@@ -44,7 +44,6 @@ const ProductList = () => {
 
   return(
     <>
-      <Header/>
       <FilterBar/>
       <div className="product-list-container">
         {output}

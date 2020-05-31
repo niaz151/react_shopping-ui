@@ -67,7 +67,6 @@ const ShoppingCartLanding = () => {
 
   return(
     <React.Fragment>
-      <Header/>
       <div className='shoppingcart-landing'>
         <div className='shoppingcart-menu'>
           <div className='shoppingcart-menu-icon'>

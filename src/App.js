@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/App.css';
 import ProductList from './components/ProductList';
+import Header from './components/Header';
 import { createStore } from 'redux';
 import reducers from './reducers';
 import { Provider } from 'react-redux';
@@ -18,12 +19,15 @@ function App() {
         <div className="App">
           <Switch>
             <Route exact path="/">
+              <Header/>
               <ProductList/>
             </Route>
             <Route path="/cart">
+              <Header/>
               <ShoppingCartLanding/>
             </Route>
             <Route path="/itemDetails">
+              <Header/>
               <ProductPage/>
             </Route>
         </Switch>
