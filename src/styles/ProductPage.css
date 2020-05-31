@@ -24,7 +24,6 @@
 .product-page-details-wrap{
     height: 100%;
     flex:1;
-    border:1px solid black;
     display:flex;
     align-items:center;
     justify-content: center;
