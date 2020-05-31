@@ -17,16 +17,21 @@ export default (state = initial_state, action) => {
       }
 
     case 'REMOVE_FROM_CART':
-      var index;
-      for(var i = 0; i < state.length; i ++){
+      var index = 0;
+      var length = Object.keys(state.items).length
+      for(var i = 0; i < length; i ++){
         if(state.items[i].title === action.payload){
           index = i;
         }
       }
+     
+      var copy = [...state.items]
+      copy.splice(index,1)
+  
       return {
         ...state,
         num_items: state.num_items -= 1,
-        items:state.items.splice(index,1)
+        items:copy
       }
 
 
