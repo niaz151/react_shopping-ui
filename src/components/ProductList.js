@@ -12,7 +12,7 @@ const ProductList = () => {
 
   // PUT ALL PRODUCTS IN REDUX STORE
   useEffect( () => {
-    var endpoint = 'http://localhost:8080/api/v1/products/getAllProducts';
+    var endpoint = 'http://ec2-34-234-201-135.compute-1.amazonaws.com:8080/api/v1/products/getAllProducts';
     fetch(endpoint)
       .then(res => {
         return res.json();

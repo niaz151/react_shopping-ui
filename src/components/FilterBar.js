@@ -65,8 +65,8 @@ export default function FilterBar() {
    
     // IF NO FILTER , SHOW ALL PRODUCTS 
     var endpoint = (event.target.value === 0)?
-      `http://localhost:8080/api/v1/products/getAllProducts`:
-      `http://localhost:8080/api/v1/products/getProducts/category=${event.target.value}`;
+      `http://ec2-34-234-201-135.compute-1.amazonaws.com:8080/api/v1/products/getAllProducts`:
+      `http://ec2-34-234-201-135.compute-1.amazonaws.com:8080/api/v1/products/getProducts/category=${event.target.value}`;
     
     // FETCH REQUEST TO API AND STORE QUERY
     fetch(endpoint)
@@ -86,7 +86,7 @@ export default function FilterBar() {
     setSize(event.target.value);
     setSortingMethod('None');
     
-    var endpoint =  `http://localhost:8080/api/v1/products/getProducts/category=${category}/size=${event.target.value}`;
+    var endpoint =  `http://ec2-34-234-201-135.compute-1.amazonaws.com:8080/api/v1/products/getProducts/category=${category}/size=${event.target.value}`;
 
     // FETCH REQUEST TO API
     fetch(endpoint)
@@ -104,7 +104,7 @@ export default function FilterBar() {
     
     setSortingMethod(event.target.value);
     
-    var endpoint =`http://localhost:8080/api/v1/products/getProducts/category=${category}/size=${size}/sort=${event.target.value}`;
+    var endpoint =`http://ec2-34-234-201-135.compute-1.amazonaws.com:8080/api/v1/products/getProducts/category=${category}/size=${size}/sort=${event.target.value}`;
     
     // FETCH REQUEST TO API
     fetch(endpoint)
